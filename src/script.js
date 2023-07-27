@@ -25,9 +25,9 @@ function onLoad() {
       });
       hideElement(refs.loaderEl, refs.selectEl);
     })
-    .catch(() =>
-      Notify.failure('Oops! Something went wrong! Try reloading the page!')
-    );
+    .catch(() => {
+      Notiflix.Notify.failure(refs.errorEl.textContent);
+    });
 }
 
 function onSelect(e) {
@@ -37,10 +37,12 @@ function onSelect(e) {
       refs.infoEl.style.display = 'flex';
       refs.infoEl.style.gap = '30px';
       refs.infoEl.style.backgroundColor = 'rgba(175, 207, 249, 0.503)';
+      refs.infoEl.classList.remove('hidden');
     })
-    .catch(() =>
-      Notify.failure('Oops! Something went wrong! Try reloading the page!')
-    );
+    .catch(() => {
+      Notify.failure('Oops! Something went wrong! Try reloading the page!');
+      hideElement(refs.infoEl); 
+    });
 }
 
 function createMarkupInfo({ url, breeds }) {
